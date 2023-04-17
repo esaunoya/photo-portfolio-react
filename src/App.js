@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Gallery from "./Gallery";
+
 function App() {
   const [galleries, setGalleries] = useState([]);
   const [images, setImages] = useState([]);
@@ -30,28 +32,7 @@ function App() {
   return (
     <div className="App">
       {galleries.map((gallery) => (
-        <div key={gallery.sys.id}>
-          <h2>{gallery.fields.galleryTitle}</h2>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {gallery.fields.images.map((image) => {
-              const filteredImages = images.filter(
-                (img) => img.sys.id === image.sys.id
-              );
-              if (filteredImages.length > 0) {
-                return (
-                  <img
-                    key={filteredImages[0].sys.id}
-                    src={filteredImages[0].fields.file.url}
-                    alt=""
-                    style={{ margin: "0 10px 10px 0" }}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
-          </div>
-        </div>
+        <Gallery gallery={gallery} images={images} />
       ))}
     </div>
   );
