@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-function Gallery({ gallery, images }) {
+function Gallery() {
+  const { slug } = useParams();
+  const [gallery, setGallery] = useState({
+    fields: {
+      galleryTitle: "",
+      images: [],
+    },
+  });
+  const [images, setImages] = useState([]);
+
+  async function fetchGallery() {
+    const url = `${process.env.REACT_APP_CONTENTFUL_API}`;
+    const response = await fetch(url);
+    const allData = await response.json();
+    const data = Object.values(allData.items).filter(
+      (v) => v.fields.slug === slug
+    );
+    setGallery(data[0]);
+  }
+
+  async function fetchImages() {
+    const url = `${process.env.REACT_APP_CONTENTFUL_API}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setImages(data.includes.Asset);
+  }
+
+  useEffect(() => {
+    fetchGallery();
+    fetchImages();
+  }, []);
+
   return (
     <div>
       <h2>{gallery.fields.galleryTitle}</h2>
