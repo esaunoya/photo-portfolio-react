@@ -25,13 +25,22 @@ function Gallery() {
     const url = `${process.env.REACT_APP_CONTENTFUL_API}`;
     const response = await fetch(url);
     const data = await response.json();
-    setImages(data.includes.Asset);
+
+    // Check if data.includes.Asset exists before setting it to images state
+    if (data.includes && data.includes.Asset) {
+      setImages(data.includes.Asset);
+    } else {
+      console.error("Error: Error retrieving assets", data);
+      // Set images to an empty array or provide a fallback value
+      setImages([]);
+    }
   }
 
   useEffect(() => {
     fetchGallery();
     fetchImages();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
 
   if (!gallery) {
     return <Navigate to="/notFound" message="Gallery not Found" />;
