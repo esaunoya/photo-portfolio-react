@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import "./Gallery.css";
 
 function Gallery() {
   const { slug } = useParams();
@@ -47,9 +48,9 @@ function Gallery() {
   }
 
   return (
-    <div>
-      <h2>{gallery.fields.galleryTitle}</h2>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className="gallery">
+      {/* <h2 className="galleryTitle">{gallery.fields.galleryTitle}</h2> */}
+      <div className="galleryImages">
         {gallery.fields.images.map((image) => {
           const filteredImages = images.filter(
             (img) => img.sys.id === image.sys.id
@@ -57,10 +58,10 @@ function Gallery() {
           if (filteredImages.length > 0) {
             return (
               <img
+                className="galleryImage"
                 key={filteredImages[0].sys.id}
                 src={filteredImages[0].fields.file.url}
                 alt=""
-                style={{ margin: "0 10px 10px 0" }}
               />
             );
           } else {

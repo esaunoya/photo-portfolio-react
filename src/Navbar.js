@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
   const [galleries, setGalleries] = useState([]);
@@ -20,7 +21,7 @@ export default function Navbar() {
       <Link to="/" className="site-title">
         Esau Noya - Photos
       </Link>
-      <ul>
+      <ul className="links">
         {galleries.map((gallery) => (
           <li key={gallery.sys.id}>
             <NavLink to={`/gallery/${gallery.fields.slug}`}>
