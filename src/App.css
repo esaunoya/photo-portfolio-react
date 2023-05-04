@@ -37,10 +37,26 @@
   }
 } */
 
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 .App {
   display: flex;
   flex-direction: row;
+
+  width: 100%;
   height: 100vh;
+  overflow-x: scroll;
+  /* firefox scrollbar */
+  scrollbar-width: none;
+}
+
+.App::-webkit-scrollbar {
+  /* chrome, safari, opera */
+  display: none;
 }
 
 .container {

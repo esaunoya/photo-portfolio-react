@@ -8,8 +8,14 @@ import Gallery from "./Gallery";
 import NotFound from "./NotFound";
 
 function App() {
+  function handleScroll(event) {
+    event.preventDefault();
+    const delta = event.deltaY;
+    event.currentTarget.scrollLeft += delta;
+  }
+
   return (
-    <div className="App">
+    <div className="App" onWheel={handleScroll}>
       <Navbar></Navbar>
       <div className="container">
         <Routes>
