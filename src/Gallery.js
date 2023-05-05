@@ -60,7 +60,7 @@ function Gallery() {
               <img
                 className="galleryImage"
                 key={filteredImages[0].sys.id}
-                src={filteredImages[0].fields.file.url}
+                src={filteredImages[0].fields.file.url + `?fm=webp&h=1080`}
                 alt=""
               />
             );
