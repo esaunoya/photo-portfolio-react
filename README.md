@@ -1,3 +1,41 @@
+# React Photo Portfolio
+
+This is a photography portfolio web application built with React. The app displays galleries of images fetched from Contentful. The galleries can be navigated through a navigation bar, and the home page features a slideshow of randomly selected images from all galleries.
+
+## Prerequisites
+
+To run this project, you will need:
+
+1. A Contentful account with a Space ID and an API Key (Content Delivery API).
+2. Node.js installed on your local machine.
+
+## Content Model
+
+To set up the content model in your Contentful space, create a new content type with the following fields:
+
+1. **Content Type Name**: Gallery
+2. **Fields**:
+   - `galleryTitle` (Text, Short Text)
+   - `slug` (Text, Short Text)
+   - `images` (Media, Many files)
+
+Make sure to create entries for the Gallery content type, including a title, slug, and a set of images for each gallery.
+
+After setting up the content model, the app will fetch data from your Contentful space and display the galleries accordingly.
+
+## Setup
+
+1. Clone the repository to your local machine.
+2. Run `npm install` to install the required dependencies.
+3. Create a `.env` file in the root of the project and add the following environment variable, replacing `your_space_id` and `your_content_delivery_api_key` with your actual Space ID and API Key from Contentful.:
+
+```
+REACT_APP_CONTENTFUL_API="https://cdn.contentful.com/spaces/your_space_id/entries?access_token=your_access_token"
+```
+
+4. Run `npm start` to start the development server. The app will be accessible at [http://localhost:3000](http://localhost:3000).
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
