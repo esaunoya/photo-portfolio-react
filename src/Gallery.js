@@ -3,7 +3,10 @@ import { useParams, Navigate } from "react-router-dom";
 import "./Gallery.css";
 
 function Gallery() {
+  // Get the slug parameter from the URL
   const { slug } = useParams();
+
+  // Initialize state for gallery and images
   const [gallery, setGallery] = useState({
     fields: {
       galleryTitle: "",
@@ -12,6 +15,7 @@ function Gallery() {
   });
   const [images, setImages] = useState([]);
 
+  // Fetch the gallery data from Contentful API
   async function fetchGallery() {
     const url = `${process.env.REACT_APP_CONTENTFUL_API}`;
     const response = await fetch(url);
@@ -22,6 +26,7 @@ function Gallery() {
     setGallery(data[0]);
   }
 
+  // Fetch the images data from Contentful API
   async function fetchImages() {
     const url = `${process.env.REACT_APP_CONTENTFUL_API}`;
     const response = await fetch(url);
@@ -37,12 +42,14 @@ function Gallery() {
     }
   }
 
+  // Fetch gallery and images data when the slug parameter changes
   useEffect(() => {
     fetchGallery();
     fetchImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
+  // Navigate to notFound page if gallery is not available
   if (!gallery) {
     return <Navigate to="/notFound" message="Gallery not Found" />;
   }
@@ -53,9 +60,11 @@ function Gallery() {
       <div className="galleryImages">
         {gallery.fields.images.map((image) => {
           const filteredImages = images.filter(
+            // Find the image object in images state by matching id
             (img) => img.sys.id === image.sys.id
           );
           if (filteredImages.length > 0) {
+            // Render image with resized dimensions and in WebP format
             return (
               <img
                 className="galleryImage"
@@ -65,6 +74,7 @@ function Gallery() {
               />
             );
           } else {
+            // If image not found, render nothing
             return null;
           }
         })}
