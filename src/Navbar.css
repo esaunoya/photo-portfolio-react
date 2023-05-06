@@ -49,3 +49,12 @@ a {
 .links a:visited{
   color: white;
 }
+
+@media (max-aspect-ratio: 1/1){
+  .nav {
+    flex-basis: unset;
+    flex-grow: unset;
+    
+    gap: 1rem;
+  }
+}
