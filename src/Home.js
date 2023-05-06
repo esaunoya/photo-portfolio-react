@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Home.css";
 
 function Home() {
@@ -7,13 +7,13 @@ function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Fetch the images data from Contentful API
-  async function fetchImages() {
+  const fetchImages = useCallback(async () => {
     const url = `${process.env.REACT_APP_CONTENTFUL_API}`;
     const response = await fetch(url);
     const data = await response.json();
     // Shuffle the images before setting them to the state
     setImages(shuffle(data.includes.Asset));
-  }
+  }, []); // Add any dependencies here if needed
 
   // Fisher-Yates Shuffle algorithm
   function shuffle(array) {
