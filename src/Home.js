@@ -36,7 +36,7 @@ function Home() {
   // Fetch images on component mount
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [fetchImages]);
 
   //Timer to change the background image every x seconds
   useEffect(() => {
